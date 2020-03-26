@@ -1,0 +1,11 @@
+[Unit]
+Description=9TOKEN Daemon Serivce
+After=network.target
+
+[Service]
+Type=simple
+User=9token
+ExecStart=/opt/9token/9tokend
+
+[Install]
+WantedBy=multi-user.target

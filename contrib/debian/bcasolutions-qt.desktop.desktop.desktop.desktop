@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=9TOKEN
+Comment=9TOKEN P2P Cryptocurrency
+Exec=/usr/bin/9token-qt
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/undead80.xpm
+MimeType=x-scheme-handler/9token;
+Categories=Office;
+Name[en_US]=9token-qt.desktop.desktop.desktop

@@ -1,0 +1,11 @@
+[Protocol]
+exec=9token-qt '%u'
+protocol=9token
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

@@ -1,0 +1,28 @@
+# sphinx build directories
+_build/
+*.pyc
+# dotfiles
+.*
+!.gitignore
+# compiled python files
+*.py[co]
+# setup.py egg_info
+*.egg-info
+# emacs backup files
+*~
+# hg stuff
+*.orig
+status
+# generated for windows installer?
+install/win32/*.bat
+install/win32/meta.py
+
+# various virtualenv
+src/.9token/*.conf
+release/*
+src/obj/*
+src/obj-test/*
+9token-qt.exe
+9token-qt.dmg
+9tokend
+src/9tokend

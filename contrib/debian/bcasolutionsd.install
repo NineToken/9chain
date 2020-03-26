@@ -1,0 +1,2 @@
+debian/bin/9tokend usr/bin
+src/9tokend usr/lib/9token

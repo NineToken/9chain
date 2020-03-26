@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# PROVIDE: 9token
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+#
+# Add the following lines to /etc/rc.conf.local or /etc/rc.conf
+# to enable this service:
+#
+# 9token_enable (bool): Set to NO by default. Set this variable to YES if you want to enable 9token service.
+# 9token_config (path): Set to /usr/local/etc/9token.conf by default.
+# 9token_user:  The user account 9token daemon runs as. It uses 'root' user by default.
+# 9token_group: The group account 9token daemon runs as. It uses 'wheel' group by default.
+# 9token_datadir (str): Default to "/var/db/9token". Base data directory.
+
+. /etc/rc.subr
+
+name=9token
+rcvar=9token_enable
+
+: ${9token_enable:=NO}
+: ${9token_config=/usr/local/etc/9token.conf}
+: ${9token_datadir=/var/db/9token}
+: ${9token_user="root"}
+: ${9token_group="wheel"}
+
+required_files=${9token_config}
+command=/usr/local/bin/9tokend
+9token_chdir=${9token_datadir}
+pidfile="${9token_datadir}/9tokend.pid"
+stop_cmd=9token_stop
+command_args="-conf=${9token_config} -datadir=${9token_datadir} -daemon -pid=${pidfile}"
+start_precmd="${name}_prestart"
+
+9token_create_datadir()
+{
+	echo "Creating data directory"
+	eval mkdir -p ${9token_datadir}
+	[ $? -eq 0 ] && chown -R ${9token_user}:${9token_group} ${9token_datadir}
+}
+
+9token_prestart()
+{
+	if [ ! -d "${9token_datadir}/." ]; then
+		9token_create_datadir || return 1
+	fi
+}
+
+9token_requirepidfile()
+{
+	if [ ! "0`check_pidfile ${pidfile} ${command}`" -gt 1 ]; then
+		echo "${name} not running? (check $pidfile)."
+		exit 1
+	fi
+}
+
+9token_stop()
+{
+    9token_requirepidfile
+
+	echo "Stopping ${name}."
+	eval ${command} -conf=${9token_config} -datadir=${9token_datadir} stop
+	wait_for_pids ${rc_pid}
+}
+
+load_rc_config $name
+run_rc_command "$1"
