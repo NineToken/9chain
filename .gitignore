@@ -19,7 +19,7 @@ install/win32/meta.py
 
 # various virtualenv
 src/.9token/*.conf
-release/*
+release/qrc_bitcoin.cpp
 src/obj/*
 src/obj-test/*
 9token-qt.exe
