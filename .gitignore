@@ -22,7 +22,7 @@ src/.9token/*.conf
 release/qrc_bitcoin.cpp
 src/obj/*
 src/obj-test/*
-9token-qt.exe
-9token-qt.dmg
-9tokend
+# 9token-qt.exe
+# 9token-qt.dmg
+# 9tokend
 src/9tokend
